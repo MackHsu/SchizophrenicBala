@@ -1,0 +1,33 @@
+[
+  {
+    "textId": 0,
+    "textType": 0, //0表示对话，1表示剧情文本，2表示提示文本
+    "textName": "对话1",
+    "content": [
+      {
+        "characterId": 0, //0表示主角，其他表示其他npc
+        "content": "主角对话1"
+      },
+      {
+        "characterId": 1,
+        "content": "NPC1对话1"
+      },
+      {
+        "characterId": 0, //0表示主角，其他表示其他npc
+        "content": "主角对话2"
+      }
+    ]
+  },
+  {
+    "textId": 1,
+    "textType": 1,
+    "textName": "剧情文本1",
+    "content": "Pot偷走了NPC1的钥匙。"
+  },
+  {
+    "textId": 3,
+    "textType": 2,
+    "textName": "提示文本1",
+    "content": "获得了的钥匙。"
+  }
+]
