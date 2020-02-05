@@ -7,9 +7,10 @@ public class PlayerMovement : MonoBehaviour
 
     public CharacterController2D controller;
     float horizontalMove = 0f;
-    public float moveSpeed = 100;
+    public float moveSpeed = 50;
     Transform playerTransform;
     Transform groundTransfrom;
+    bool jump = false;
 
     // Start is called before the first frame update
     void Start()
@@ -22,14 +23,15 @@ public class PlayerMovement : MonoBehaviour
     void Update()
     {
         horizontalMove = Input.GetAxisRaw("Horizontal") * moveSpeed;
+        if (Input.GetButtonDown("Jump"))
+        {
+            jump = true;
+        }
     }
 
     private void FixedUpdate()
     {
-        controller.Move(horizontalMove * Time.fixedDeltaTime, false, false);
-        if (playerTransform.position.x < groundTransfrom.position.x - groundTransfrom.lossyScale.x / 2)
-        {
-            playerTransform.position = new Vector3(groundTransfrom.position.x - groundTransfrom.lossyScale.x / 2, playerTransform.position.y, playerTransform.position.z);
-        }
+        controller.Move(horizontalMove * Time.fixedDeltaTime, false, jump);
+        jump = false;
     }
 }
