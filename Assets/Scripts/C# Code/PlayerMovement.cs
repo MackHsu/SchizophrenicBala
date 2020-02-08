@@ -11,6 +11,7 @@ public class PlayerMovement : MonoBehaviour
     Transform playerTransform;
     Transform groundTransfrom;
     bool jump = false;
+    bool canMove = true;
 
     // Start is called before the first frame update
     void Start()
@@ -31,7 +32,10 @@ public class PlayerMovement : MonoBehaviour
 
     private void FixedUpdate()
     {
-        controller.Move(horizontalMove * Time.fixedDeltaTime, false, jump);
+        if (canMove)
+        {
+            controller.Move(horizontalMove * Time.fixedDeltaTime, false, jump);
+        }
         jump = false;
     }
 }
