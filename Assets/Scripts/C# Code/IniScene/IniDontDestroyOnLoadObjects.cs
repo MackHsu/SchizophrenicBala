@@ -11,6 +11,6 @@ public class IniDontDestroyOnLoadObjects : MonoBehaviour
     {
         DontDestroyOnLoad(gameManager);
 
-        SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex + 1);
+        UnityEngine.SceneManagement.SceneManager.LoadScene(UnityEngine.SceneManagement.SceneManager.GetActiveScene().buildIndex + 1);
     }
 }

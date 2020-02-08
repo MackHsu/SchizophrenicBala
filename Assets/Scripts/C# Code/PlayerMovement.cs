@@ -11,7 +11,7 @@ public class PlayerMovement : MonoBehaviour
     Transform playerTransform;
     Transform groundTransfrom;
     bool jump = false;
-    bool canMove = true;
+    public bool canMove = true;
 
     // Start is called before the first frame update
     void Start()

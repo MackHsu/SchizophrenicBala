@@ -1,0 +1,59 @@
+[
+  {
+    "id": 0,
+    "type": 0,
+    "content": [
+      {
+        "imagePath": "Geno/Geno.png",
+        "side": 0,
+        "characterName": "Geno",
+        "content": "该死……这次下手重了点。"
+      },
+      {
+        "imagePath": "Geno/Geno.png",
+        "side": 0,
+        "characterName": "Geno",
+        "content": "看来事情闹得太严重了，估计警察很快就要来了。"
+      },
+      {
+        "imagePath": "Geno/Geno.png",
+        "side": 0,
+        "characterName": "Geno",
+        "content": "该死，看看有没有东西可以拿来当武器用用，不知道这次还闯不闯得出去。"
+      }
+    ]
+  },
+  {
+    "id": 1,
+    "type": 1,
+    "content": "靠近可拾取的物品时，按下E可拾取到背包中。"
+  },
+  {
+    "id": 2,
+    "type": 2,
+    "content": "按下E拾取。"
+  },
+  {
+    "id": 3,
+    "type": 1,
+    "content": "按下B可查看背包。"
+  },
+  {
+    "id": 4,
+    "type": 1,
+    "content": [
+      {
+        "imagePath": "NPC/Police.png",
+        "side": 1,
+        "characterName": "警察A",
+        "content": "站住别动，举起手来立刻投降！"
+      },
+      {
+        "imagePath": "Geno/Geno.png",
+        "side": 0,
+        "characterName": "Geno",
+        "content": "看来，只能开干了。"
+      }
+    ]
+  }
+]
