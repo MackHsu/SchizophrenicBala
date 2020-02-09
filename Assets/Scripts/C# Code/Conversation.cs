@@ -83,6 +83,7 @@ public class Conversation : MonoBehaviour
         {
             if (i >= contentStr.Length)
             {
+                displaying = false;
                 yield break;
             }
             content.text += contentStr[i];

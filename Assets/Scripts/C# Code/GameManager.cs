@@ -17,9 +17,14 @@ public class GameManager : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        personalities = JsonMapper.ToObject(File.ReadAllText(Application.dataPath + "/Scripts/json/personalitiesTest.json", Encoding.GetEncoding("GB2312")));
-        textJson = JsonMapper.ToObject(File.ReadAllText(Application.dataPath + "/Scripts/json/text.json", Encoding.GetEncoding("GB2312")));
-        itemsJson = JsonMapper.ToObject(File.ReadAllText(Application.dataPath + "/Scripts/json/items.json", Encoding.GetEncoding("GB2312")));
+        //personalities = JsonMapper.ToObject(UTF82GB2312(Resources.Load<TextAsset>("json/personalitiesTest").text));
+        //textJson = JsonMapper.ToObject(UTF82GB2312(Resources.Load<TextAsset>("json/text").text));
+        //itemsJson = JsonMapper.ToObject(UTF82GB2312(Resources.Load<TextAsset>("json/items").text));
+
+        personalities = JsonMapper.ToObject(Resources.Load<TextAsset>("json/personalitiesTest").text);
+        textJson = JsonMapper.ToObject(Resources.Load<TextAsset>("json/text").text);
+        itemsJson = JsonMapper.ToObject(Resources.Load<TextAsset>("json/items").text);
+
         DontDestroyOnLoad(gameObject);
     }
 
@@ -28,4 +33,14 @@ public class GameManager : MonoBehaviour
     {
         
     }
+
+    //private string UTF82GB2312(string str1)
+    //{
+    //    Encoding utf8 = Encoding.GetEncoding(65001);
+    //    Encoding gb2312 = Encoding.GetEncoding("GB2312");
+    //    byte[] temp1 = utf8.GetBytes(str1);
+    //    byte[] temp2 = Encoding.Convert(utf8, gb2312, temp1);
+    //    string str2 = gb2312.GetString(temp2);
+    //    return str2;
+    //}
 }

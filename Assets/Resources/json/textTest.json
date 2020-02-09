@@ -1,0 +1,39 @@
+﻿[
+  {
+    "id": 0,
+    "type": 0, //0表示对话，1表示剧情文本，2表示提示文本
+    "name": "对话1",
+    "content": [
+      {
+        "imagePath": "",  //角色图片路径
+        "side": 0,  //0表示左边显示图片，1表示右边
+        "characterName": "Geno",
+        "content": "主角对话1"
+      },
+      {
+        "imagePath": "",
+        "side": 0,
+        "characterName": "Npc",
+        "content": "NPC1对话1"
+      },
+      {
+        "imagePath": "",
+        "side": 0,
+        "characterName": "Geno",
+        "content": "主角对话2"
+      }
+    ]
+  },
+  {
+    "id": 1,
+    "type": 1,
+    "textName": "剧情文本1",
+    "content": "Pot偷走了NPC1的钥匙。"
+  },
+  {
+    "id": 3,
+    "type": 2,
+    "textName": "提示文本1",
+    "content": "获得了的钥匙。"
+  }
+]

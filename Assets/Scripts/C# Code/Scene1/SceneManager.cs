@@ -4,7 +4,6 @@ using UnityEngine;
 
 public class SceneManager : MonoBehaviour
 {
-    public GameObject conversationPrefab;
     public Canvas canvas;
     public GameObject player;
     Conversation conversation;
@@ -12,6 +11,7 @@ public class SceneManager : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
+        GameObject conversationPrefab = Resources.Load("Prefabs/Conversation") as GameObject;
         GameObject con = Instantiate(conversationPrefab, canvas.transform.position,Quaternion.identity,canvas.transform);
         con.SetActive(false);
         conversation = con.GetComponent<Conversation>();
