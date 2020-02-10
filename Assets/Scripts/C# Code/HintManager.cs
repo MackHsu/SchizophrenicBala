@@ -1,23 +1,61 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
+using LitJson;
 
-public class HintManager : MonoBehaviour
+public class HintManager
 {
-    public GameObject hint;
+    public static GameObject ShowHint(GameObject canvas, int textId)
+    {
+        JsonData textJson = GameManager.textJson;
+        GameObject hintPrefab = Resources.Load("Prefabs/Hint") as GameObject;
+        GameObject hint = GameObject.Instantiate(hintPrefab, canvas.transform.position, Quaternion.identity, canvas.transform);
+        GameObject text = hint.transform.Find("Box").Find("Text").gameObject;
 
-    private void OnTriggerEnter2D(Collider2D collision)
-    {
-        if (collision.tag == "Player")
+        string content = "";
+        foreach (JsonData jd in textJson)
         {
-            hint.SetActive(true);
+            if ((int)jd["id"] == textId)
+            {
+                content = (string)jd["content"];
+                break;
+            }
         }
+        text.GetComponent<Text>().text = content;
+        return hint;
     }
-    private void OnTriggerExit2D(Collider2D collision)
+
+    public static GameObject ShowDialogue(GameObject canvas, int textId)
     {
-        if (collision.tag == "Player")
+        GameObject conversationPrefab = Resources.Load("Prefabs/Conversation") as GameObject;
+        GameObject con = GameObject.Instantiate(conversationPrefab, canvas.transform.position, Quaternion.identity, canvas.transform);
+        con.SetActive(false);
+        Conversation conversation = con.GetComponent<Conversation>();
+        GameObject player = GameObject.FindGameObjectWithTag("Player");
+        player.GetComponent<PlayerMovement>().canMove = false;
+        conversation.SetAndShow(textId);
+        return con;
+    }
+
+    public static GameObject ShowTips(GameObject canvas, int textId)
+    {
+        GameObject player = GameObject.FindGameObjectWithTag("Player");
+        player.GetComponent<PlayerMovement>().canMove = false;
+        JsonData textJson = GameManager.textJson;
+        GameObject tipsPrefab = Resources.Load("Prefabs/Tips") as GameObject;
+        GameObject tips = GameObject.Instantiate(tipsPrefab, canvas.transform.position, Quaternion.identity, canvas.transform);
+        GameObject tipsText = tips.transform.Find("Box").Find("Text").gameObject;
+        string content = "";
+        foreach (JsonData jd in textJson)
         {
-            hint.SetActive(false);
+            if ((int)jd["id"] == textId)
+            {
+                content = (string)jd["content"];
+                break;
+            }
         }
+        tipsText.GetComponent<Text>().text = content;
+        return tips;
     }
 }

@@ -14,7 +14,6 @@ public class Conversation : MonoBehaviour
     GameObject player;
     public Text characterName;
     public Text content;
-    public Text hint;
     public float textSpeed = 0.1f;  //0.1秒一个字逐字播放
     string contentStr;
     JsonData textJson;
