@@ -4,19 +4,19 @@
     "type": 0,
     "content": [
       {
-        "imagePath": "Geno/Geno.png",
+        "imagePath": "Geno/Geno",
         "side": 0,
         "characterName": "Geno",
         "content": "该死……这次下手重了点。"
       },
       {
-        "imagePath": "Geno/Geno.png",
+        "imagePath": "Geno/Geno",
         "side": 0,
         "characterName": "Geno",
         "content": "看来事情闹得太严重了，估计警察很快就要来了。"
       },
       {
-        "imagePath": "Geno/Geno.png",
+        "imagePath": "Geno/Geno",
         "side": 0,
         "characterName": "Geno",
         "content": "该死，看看有没有东西可以拿来当武器用用，不知道这次还闯不闯得出去。"
@@ -43,13 +43,13 @@
     "type": 1,
     "content": [
       {
-        "imagePath": "NPC/Police.png",
+        "imagePath": "NPC/Police",
         "side": 1,
         "characterName": "警察A",
         "content": "站住别动，举起手来立刻投降！"
       },
       {
-        "imagePath": "Geno/Geno.png",
+        "imagePath": "Geno/Geno",
         "side": 0,
         "characterName": "Geno",
         "content": "看来，只能开干了。"

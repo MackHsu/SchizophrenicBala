@@ -9,6 +9,8 @@ public class Conversation : MonoBehaviour
     int textId;
     int textIndex;
     int index = 0;
+    int side;
+    string imagePath;
     GameObject player;
     public Text characterName;
     public Text content;
@@ -18,18 +20,13 @@ public class Conversation : MonoBehaviour
     JsonData textJson;
     bool displaying = false;    //文字逐渐显现的过程中
 
+    public Image imageLeft;
+    public Image imageRight;
+
     private void Awake()
     {
         player = GameObject.Find("Player");
         textJson = GameManager.textJson;
-        for(int i = 0; i < textJson.Count; i++)
-        {
-            if((int)textJson[i]["id"] == textId)
-            {
-                textIndex = i;
-                break;
-            }
-        }
     }
 
     private void Update()
@@ -51,7 +48,7 @@ public class Conversation : MonoBehaviour
                 StopCoroutine("ShowContent");
                 index++;
                 content.text = "";
-                if (index < textJson[textIndex].Count)
+                if (index < textJson[textIndex]["content"].Count)
                     Show();
                 else
                 {
@@ -66,6 +63,14 @@ public class Conversation : MonoBehaviour
     {
         this.textId = textId;
         gameObject.SetActive(true);
+        for (int i = 0; i < textJson.Count; i++)
+        {
+            if ((int)textJson[i]["id"] == this.textId)
+            {
+                textIndex = i;
+                break;
+            }
+        }
         Show();
     }
 
@@ -73,6 +78,20 @@ public class Conversation : MonoBehaviour
     {
         characterName.text = (string)textJson[textIndex]["content"][index]["characterName"];
         contentStr = (string)textJson[textIndex]["content"][index]["content"];
+        side = (int)textJson[textIndex]["content"][index]["side"];
+        imagePath = (string)textJson[textIndex]["content"][index]["imagePath"];
+
+        Image image = side == 0 ? imageLeft : imageRight;
+        Image otherImage = side == 0 ? imageRight : imageLeft;
+        Sprite sprite = Resources.Load("Images/" + imagePath, typeof(Sprite)) as Sprite;
+        if (!image.gameObject.activeSelf) image.gameObject.SetActive(true);
+        image.sprite = sprite;
+        image.color = new Color(1, 1, 1, 1);
+        if (otherImage.gameObject.activeSelf)
+        {
+            otherImage.color = new Color(1, 1, 1, 0.5f);
+        }
+
         StartCoroutine("ShowContent");
     }
     private IEnumerator ShowContent()
