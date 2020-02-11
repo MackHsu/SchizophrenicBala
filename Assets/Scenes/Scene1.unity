@@ -257,7 +257,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   canvas: {fileID: 2050310264}
-  player: {fileID: 868254346}
 --- !u!4 &53901278
 Transform:
   m_ObjectHideFlags: 0
