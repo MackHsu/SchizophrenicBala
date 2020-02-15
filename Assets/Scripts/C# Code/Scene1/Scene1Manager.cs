@@ -4,7 +4,7 @@ using UnityEngine;
 using LitJson;
 using System.IO;
 
-public class SceneManager : MonoBehaviour
+public class Scene1Manager : MonoBehaviour
 {
     public GameObject canvas;
 

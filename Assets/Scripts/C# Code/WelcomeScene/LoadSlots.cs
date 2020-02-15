@@ -4,8 +4,9 @@ using UnityEngine;
 using UnityEngine.UI;
 using LitJson;
 using System.IO;
+using UnityEngine.SceneManagement;
 
-public class SaveSlots : MonoBehaviour
+public class LoadSlots : MonoBehaviour
 {
     public GameObject slot1;
     public GameObject slot2;
@@ -21,15 +22,14 @@ public class SaveSlots : MonoBehaviour
         LoadDatas(slot1, 1);
         LoadDatas(slot2, 2);
         LoadDatas(slot3, 3);
-        confirm.onClick.AddListener(Save);
+        confirm.onClick.AddListener(Load);
     }
 
     // Update is called once per frame
     void Update()
     {
-        if (selectedId < 1 || selectedId > 3) confirm.interactable = false;
+        if (selectedId < 1 || selectedId > 3 || !File.Exists("Save/save" + selectedId + ".json")) confirm.interactable = false;
         else confirm.interactable = true;
-
     }
 
     void Cancel()
@@ -59,19 +59,11 @@ public class SaveSlots : MonoBehaviour
         }
     }
 
-    void Save()
+    void Load()
     {
-        if (!File.Exists("Save/save" + selectedId + ".json")) File.Create("Save/save" + selectedId + ".json").Close();
-
-        using (StreamWriter sw = new StreamWriter(new FileStream("Save/save" + selectedId + ".json", FileMode.Truncate)))
-        {
-            string saveStr = JsonMapper.ToJson(GameManager.save);
-            sw.Write(saveStr);
-            sw.Close();
-        }
-        LoadDatas(slot1, 1);
-        LoadDatas(slot2, 2);
-        LoadDatas(slot3, 3);
+        GameManager.save = JsonMapper.ToObject<Save>(File.ReadAllText("Save/save" + selectedId + ".json"));
+        int scene = GameManager.save.scene;
+        SceneManager.LoadScene("Scene" + scene);
     }
 
     public void Click(int slotId)
