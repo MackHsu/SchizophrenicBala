@@ -14,6 +14,7 @@ public class GameManager : MonoBehaviour
     public static Save save;
     static GameObject player;
     public static bool menuDisplaying = false;    //是否正在显示菜单
+    public static bool inventoryDisplaying = false; //物品栏
 
     public static Dictionary<string, bool> flags;
 
@@ -38,6 +39,13 @@ public class GameManager : MonoBehaviour
             GameObject menuPrefab = Resources.Load("Prefabs/menu") as GameObject;
             GameObject menu = Instantiate(menuPrefab, canvas.transform.position, Quaternion.identity, canvas.transform);
             menuDisplaying = true;
+        }
+        if (!inventoryDisplaying && Input.GetKeyDown(KeyCode.B))
+        {
+            GameObject canvas = GameObject.Find("Canvas");
+            GameObject inventoryPrefab = Resources.Load("Prefabs/Inventory") as GameObject;
+            GameObject inventory = Instantiate(inventoryPrefab, canvas.transform.position, Quaternion.identity, canvas.transform);
+            inventoryDisplaying = true;
         }
     }
 }

@@ -782,8 +782,9 @@ GameObject:
   - component: {fileID: 936549512}
   - component: {fileID: 936549511}
   - component: {fileID: 936549510}
+  - component: {fileID: 936549514}
   m_Layer: 0
-  m_Name: HintTrigger
+  m_Name: SteelPipe
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -891,6 +892,20 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 5
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &936549514
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 936549509}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 4dfa834ba4ea7b14ab2924e8251f6748, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  itemId: 0
+  number: 1
 --- !u!1 &1018435443
 GameObject:
   m_ObjectHideFlags: 0
