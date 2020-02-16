@@ -17,7 +17,7 @@ public class Menu : MonoBehaviour
     void Start()
     {
         player = GameObject.Find("Player");
-        player.GetComponent<PlayerMovement>().canMove = false;
+        //player.GetComponent<PlayerMovement>().canMove = false;
 
         saveBtn.onClick.AddListener(Save);
         cancelBtn.onClick.AddListener(Cancel);
@@ -35,7 +35,8 @@ public class Menu : MonoBehaviour
 
     private void OnDestroy()
     {
-        player.GetComponent<PlayerMovement>().canMove = true;
+        //player.GetComponent<PlayerMovement>().canMove = true;
+        GameManager.focusStack.Remove(gameObject);
     }
 
     void Save()
@@ -43,6 +44,7 @@ public class Menu : MonoBehaviour
         GameObject saveSlotsPrefab = Resources.Load("Prefabs/SaveSlots") as GameObject;
         GameObject canvas = GameObject.Find("Canvas");
         saveSlots = Instantiate(saveSlotsPrefab, canvas.transform.position, Quaternion.identity, canvas.transform);
+        GameManager.focusStack.Add(saveSlots);
         //if (!File.Exists("save.json")) File.Create("save.json").Close();
         //using (StreamWriter sw = new StreamWriter(new FileStream("save.json", FileMode.Truncate)))
         //{
@@ -54,7 +56,6 @@ public class Menu : MonoBehaviour
 
     void Cancel()
     {
-        GameManager.menuDisplaying = false;
         Destroy(gameObject);
     }
 

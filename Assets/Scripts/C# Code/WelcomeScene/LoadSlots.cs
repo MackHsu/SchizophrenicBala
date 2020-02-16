@@ -87,4 +87,9 @@ public class LoadSlots : MonoBehaviour
                 break;
         }
     }
+
+    private void OnDestroy()
+    {
+        GameManager.focusStack.Remove(gameObject);
+    }
 }

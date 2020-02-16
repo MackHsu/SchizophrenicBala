@@ -14,7 +14,7 @@ public class Inventory : MonoBehaviour
     void Start()
     {
         cancel.onClick.AddListener(Cancel);
-        GameObject.Find("Player").GetComponent<PlayerMovement>().canMove = false;
+        //GameObject.Find("Player").GetComponent<PlayerMovement>().canMove = false;
         inventory = GameManager.save.inventory;
         page = 1;
         for (int i = 0; i < inventory.Count && i < 18 * page; i++)
@@ -33,12 +33,12 @@ public class Inventory : MonoBehaviour
 
     private void OnDestroy()
     {
-        GameObject.Find("Player").GetComponent<PlayerMovement>().canMove = true;
+        //GameObject.Find("Player").GetComponent<PlayerMovement>().canMove = true;
+        GameManager.focusStack.Remove(gameObject);
     }
 
     void Cancel()
     {
-        GameManager.inventoryDisplaying = false;
         Destroy(gameObject);
     }
 }

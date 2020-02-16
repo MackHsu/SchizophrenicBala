@@ -51,7 +51,7 @@ public class Conversation : MonoBehaviour
                     Show();
                 else
                 {
-                    player.GetComponent<PlayerMovement>().canMove = true;
+                    //player.GetComponent<PlayerMovement>().canMove = true;
                     Destroy(gameObject);
                 }
             }
@@ -108,5 +108,10 @@ public class Conversation : MonoBehaviour
             i++;
             yield return new WaitForSeconds(textSpeed);
         }
+    }
+
+    private void OnDestroy()
+    {
+        GameManager.focusStack.Remove(gameObject);
     }
 }

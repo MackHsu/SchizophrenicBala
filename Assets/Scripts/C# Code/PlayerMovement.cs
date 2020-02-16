@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 public class PlayerMovement : MonoBehaviour
 {
@@ -23,6 +24,9 @@ public class PlayerMovement : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+        if (SceneManager.GetActiveScene().name == "WelcomeScene" || GameManager.focusStack.Count != 0) canMove = false;
+        else canMove = true;
+
         horizontalMove = Input.GetAxisRaw("Horizontal") * moveSpeed;
         if (Input.GetButtonDown("Jump"))
         {

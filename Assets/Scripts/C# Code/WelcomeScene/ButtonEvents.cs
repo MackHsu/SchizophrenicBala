@@ -34,5 +34,6 @@ public class ButtonEvents : MonoBehaviour
         GameObject loadSlotsPrefab = Resources.Load("Prefabs/LoadSlots") as GameObject;
         GameObject canvas = GameObject.Find("Canvas");
         GameObject loadSlots = Instantiate(loadSlotsPrefab, canvas.transform.position, Quaternion.identity, canvas.transform);
+        GameManager.focusStack.Add(loadSlots);
     }
 }

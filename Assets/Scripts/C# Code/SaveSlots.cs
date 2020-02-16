@@ -95,4 +95,9 @@ public class SaveSlots : MonoBehaviour
                 break;
         }
     }
+
+    private void OnDestroy()
+    {
+        GameManager.focusStack.Remove(gameObject);
+    }
 }
