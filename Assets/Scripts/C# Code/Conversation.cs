@@ -113,5 +113,7 @@ public class Conversation : MonoBehaviour
     private void OnDestroy()
     {
         GameManager.focusStack.Remove(gameObject);
+        if (GameManager.focusStack.Count == 0)
+            GameObject.Find("Canvas/Mask").SetActive(false);
     }
 }

@@ -7,7 +7,7 @@ using UnityEngine.UI;
 public class ItemSlot : MonoBehaviour
 {
     int itemId;
-    string description;
+    public string description;
     JsonData itemData;
 
     public void SetItem(int itemId)

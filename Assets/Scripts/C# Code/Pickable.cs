@@ -25,21 +25,4 @@ public class Pickable : MonoBehaviour
             Destroy(gameObject);
         }
     }
-
-    //private void OnTriggerEnter2D(Collider2D collision)
-    //{
-    //    if (collision.tag == "Player" && Input.GetKeyDown(KeyCode.E)) 
-    //    {
-    //        foreach(Item item in GameManager.save.inventory)
-    //        {
-    //            if (item.id == itemId)
-    //            {
-    //                item.count += number;
-    //                Destroy(gameObject);
-    //            }
-    //        }
-    //        GameManager.save.inventory.Add(new Item(itemId, number));
-    //        Destroy(gameObject);
-    //    }
-    //}
 }

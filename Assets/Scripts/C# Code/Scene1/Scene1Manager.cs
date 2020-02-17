@@ -12,6 +12,7 @@ public class Scene1Manager : MonoBehaviour
     GameObject popUp;
     bool tipsShowed = false;
     List<bool> flags;
+    bool itemExits = false;
 
     // Start is called before the first frame update
     void Start()
@@ -22,6 +23,31 @@ public class Scene1Manager : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+        if (!itemExits)
+        {
+            foreach (Item item in GameManager.save.inventory)
+            {
+                if (item.id == 0)
+                {
+                    //如果玩家inventory中存在0号物品（钢管），则把场景中的可拾取钢管删除
+                    itemExits = true;
+                    break;
+                }
+            }
+            if (!itemExits)
+            {
+                GameObject steelPipe = new GameObject("SteelPipe");
+                steelPipe.transform.position = new Vector3(-1, -2.72f, 0);
+                steelPipe.AddComponent<SpriteRenderer>().sprite = Resources.Load("Images/Items/SteelPipe", typeof(Sprite)) as Sprite;
+                steelPipe.AddComponent<BoxCollider2D>().isTrigger = true;
+                steelPipe.AddComponent<HintTrigger>().canvas = canvas;
+                steelPipe.AddComponent<SteelPipe>();
+                Pickable steelPipePick = steelPipe.AddComponent<Pickable>();
+                steelPipePick.itemId = 0;
+                steelPipePick.number = 1;
+                itemExits = true;
+            }
+        }
         if (GameManager.focusStack.Count == 0)
         {
             if (GameManager.save.flags["S1F1"] == false)
@@ -41,26 +67,5 @@ public class Scene1Manager : MonoBehaviour
 
             }
         }
-        //if (GameManager.save.flags["S1F1"] == false)
-        //{
-        //    if (tipsShowed == false && GameManager.focusStack.Count == 0)
-        //    {
-        //        //开场对话已经结束，需要展示拾取提示
-        //        tips = HintManager.ShowTips(canvas, 1);
-        //        tipsShowed = true;
-        //    }
-        //    else if (tipsShowed == true && Input.GetKeyDown(KeyCode.Return))
-        //    {
-        //        //关闭拾取提示，剧情进度S1F1完成，角色可以移动
-        //        GameManager.save.flags["S1F1"] = true;
-        //        Destroy(tips);
-        //        //player.GetComponent<PlayerMovement>().canMove = true;
-        //    }
-
-        //}
-        //else
-        //{
-        //    //已经完成了剧情进度S1F1
-        //}
     }
 }

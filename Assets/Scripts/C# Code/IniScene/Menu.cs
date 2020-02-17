@@ -37,6 +37,8 @@ public class Menu : MonoBehaviour
     {
         //player.GetComponent<PlayerMovement>().canMove = true;
         GameManager.focusStack.Remove(gameObject);
+        if (GameManager.focusStack.Count == 0)
+            GameObject.Find("Canvas/Mask").SetActive(false);
     }
 
     void Save()

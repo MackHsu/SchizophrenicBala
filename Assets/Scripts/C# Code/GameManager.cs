@@ -2,8 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 using LitJson;
-using System.IO;
-using System.Text;
+using UnityEngine.UI;
 
 
 public class GameManager : MonoBehaviour
@@ -36,6 +35,7 @@ public class GameManager : MonoBehaviour
         {
             //打开菜单
             GameObject canvas = GameObject.Find("Canvas");
+            canvas.transform.Find("Mask").GetComponent<Image>().gameObject.SetActive(true);
             GameObject menuPrefab = Resources.Load("Prefabs/menu") as GameObject;
             GameObject menu = Instantiate(menuPrefab, canvas.transform.position, Quaternion.identity, canvas.transform);
             focusStack.Add(menu);
@@ -43,6 +43,7 @@ public class GameManager : MonoBehaviour
         else if (focusStack.Count == 0 && Input.GetKeyDown(KeyCode.B))
         {
             GameObject canvas = GameObject.Find("Canvas");
+            canvas.transform.Find("Mask").GetComponent<Image>().gameObject.SetActive(true);
             GameObject inventoryPrefab = Resources.Load("Prefabs/Inventory") as GameObject;
             GameObject inventory = Instantiate(inventoryPrefab, canvas.transform.position, Quaternion.identity, canvas.transform);
             focusStack.Add(inventory);

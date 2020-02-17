@@ -28,6 +28,7 @@ public class HintManager
 
     public static GameObject ShowDialogue(GameObject canvas, int textId)
     {
+        canvas.transform.Find("Mask").gameObject.SetActive(true);
         GameObject conversationPrefab = Resources.Load("Prefabs/Conversation") as GameObject;
         GameObject con = GameObject.Instantiate(conversationPrefab, canvas.transform.position, Quaternion.identity, canvas.transform);
         GameManager.focusStack.Add(con);
@@ -41,6 +42,7 @@ public class HintManager
 
     public static GameObject ShowTips(GameObject canvas, int textId)
     {
+        canvas.transform.Find("Mask").gameObject.SetActive(true);
         GameObject player = GameObject.FindGameObjectWithTag("Player");
         //player.GetComponent<PlayerMovement>().canMove = false;
         JsonData textJson = GameManager.textJson;
