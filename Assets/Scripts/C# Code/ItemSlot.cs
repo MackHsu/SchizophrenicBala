@@ -22,8 +22,11 @@ public class ItemSlot : MonoBehaviour
             }
         }
         string imagePath = (string)itemData["imagePath"];
-        gameObject.GetComponent<Image>().sprite = Resources.Load(imagePath, typeof(Sprite)) as Sprite;
+        //gameObject.GetComponent<Image>().sprite = Resources.Load(imagePath, typeof(Sprite)) as Sprite;
+        GameObject itemImage = gameObject.transform.Find("ItemImage").gameObject;
+        itemImage.GetComponent<Image>().sprite = Resources.Load(imagePath, typeof(Sprite)) as Sprite;
+        itemImage.GetComponent<Image>().color = new Color(1, 1, 1, 1);
         description = (string)itemData["desc"];
-        gameObject.SetActive(true);
+        gameObject.GetComponent<Button>().interactable = true;
     }
 }
