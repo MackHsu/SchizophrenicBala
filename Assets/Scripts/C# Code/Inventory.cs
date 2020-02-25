@@ -33,9 +33,8 @@ public class Inventory : MonoBehaviour
         nextPage.onClick.AddListener(() => { ChangePage(1); });
         for (int i = 0; i < inventory.Count && i < 18 * page; i++)
         {
-            int itemId = inventory[i].id;
             GameObject slot = slots[i];
-            slot.GetComponent<ItemSlot>().SetItem(itemId);
+            slot.GetComponent<ItemSlot>().SetItem(inventory[i].id, inventory[i].count);
         }
 
         foreach (GameObject slot in slots)
@@ -87,13 +86,13 @@ public class Inventory : MonoBehaviour
             slot.GetComponent<Button>().interactable = false;
             slot.GetComponent<Image>().color = color;
             slot.transform.Find("ItemImage").GetComponent<Image>().color = new Color(1, 1, 1, 0);
+            slot.transform.Find("Count").gameObject.SetActive(false);
         }
 
         for (int i = 0; i < inventory.Count && i < 18 * page; i++)
         {
-            int itemId = inventory[i + (page - 1) * 18].id;
             GameObject slot = slots[i];
-            slot.GetComponent<ItemSlot>().SetItem(itemId);
+            slot.GetComponent<ItemSlot>().SetItem(inventory[i + (page - 1) * 18].id, inventory[i + (page - 1) * 18].count);
         }
     }
 }

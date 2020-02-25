@@ -8,11 +8,13 @@ public class ItemSlot : MonoBehaviour
 {
     int itemId;
     public string description;
+    public int count;
     JsonData itemData;
 
-    public void SetItem(int itemId)
+    public void SetItem(int itemId, int count)
     {
         this.itemId = itemId;
+        this.count = count;
         foreach(JsonData item in GameManager.itemsJson)
         {
             if ((int)item["id"] == itemId)
@@ -27,6 +29,10 @@ public class ItemSlot : MonoBehaviour
         itemImage.GetComponent<Image>().sprite = Resources.Load(imagePath, typeof(Sprite)) as Sprite;
         itemImage.GetComponent<Image>().color = new Color(1, 1, 1, 1);
         description = (string)itemData["desc"];
+        
+        GameObject countText = gameObject.transform.Find("Count").gameObject;
+        countText.SetActive(true);
+        countText.GetComponent<Text>().text = this.count + "";
         gameObject.GetComponent<Button>().interactable = true;
     }
 }
