@@ -9,7 +9,7 @@ public class Pickable : MonoBehaviour
 
     private void OnTriggerStay2D(Collider2D collision)
     {
-        if (collision.tag == "Player" && Input.GetKeyDown(KeyCode.E))
+        if (Input.GetKeyDown(KeyCode.E) && collision.tag == "Player")
         {
             bool found = false;
             foreach (Item item in GameManager.save.inventory)

@@ -61,6 +61,7 @@ public class SaveSlots : MonoBehaviour
 
     void Save()
     {
+        if (!Directory.Exists("Save")) Directory.CreateDirectory("Save");
         if (!File.Exists("Save/save" + selectedId + ".json")) File.Create("Save/save" + selectedId + ".json").Close();
 
         using (StreamWriter sw = new StreamWriter(new FileStream("Save/save" + selectedId + ".json", FileMode.Truncate)))
