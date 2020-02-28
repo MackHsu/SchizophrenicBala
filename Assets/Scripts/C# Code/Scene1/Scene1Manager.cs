@@ -10,14 +10,16 @@ public class Scene1Manager : MonoBehaviour
 
     GameObject player;
     GameObject popUp;
-    bool tipsShowed = false;
     List<bool> flags;
+    bool qteTriggered = false;
     bool itemExits = false;
+    int qteCount = 0;
 
     // Start is called before the first frame update
     void Start()
     {
         player = GameObject.Find("Player");
+        player.GetComponent<PlayerMovement>().moveSwitch = true;
     }
 
     // Update is called once per frame
@@ -25,11 +27,12 @@ public class Scene1Manager : MonoBehaviour
     {
         if (!itemExits)
         {
+            //如果库存中没有0号物品（钢管），则创建一个可拾取的钢管
             foreach (Item item in GameManager.save.inventory)
             {
                 if (item.id == 0)
                 {
-                    //如果玩家inventory中存在0号物品（钢管），则把场景中的可拾取钢管删除
+                    GameObject.Find("QTERoot").transform.Find("QTETrigger").gameObject.SetActive(true);
                     itemExits = true;
                     break;
                 }
@@ -62,10 +65,48 @@ public class Scene1Manager : MonoBehaviour
                 popUp = HintManager.ShowTips(canvas, 1);
                 GameManager.save.flags["S1F2"] = true;
             }
-            else if (GameManager.save.flags["S1F2"] == true)
+            else if (GameManager.save.flags["S1F3"] == true && !qteTriggered)
             {
-
+                player.GetComponent<PlayerMovement>().moveSwitch = false;
+                qteTriggered = true;
+                GameObject qtePrefab = Resources.Load("Prefabs/QTEButton") as GameObject;
+                GameObject qte = Instantiate(qtePrefab, canvas.transform.position, Quaternion.identity, canvas.transform);
+                QTEButton qtebutton = qte.GetComponent<QTEButton>();
+                qtebutton.correctEvent += qteCorrect;
+                qtebutton.falseEvent += qteFail;
+                qtebutton.StartQte();
             }
         }
+    }
+
+    private void qteCorrect()
+    {
+        qteCount++;
+        Debug.Log("QTE " + qteCount + " Succeeded!");
+        if (qteCount == 3)
+        {
+            StartCoroutine(playerMoveSwitch());
+            return;
+        }
+        GameObject qtePrefab = Resources.Load("Prefabs/QTEButton") as GameObject;
+        GameObject qte = Instantiate(qtePrefab, canvas.transform.position, Quaternion.identity, canvas.transform);
+        QTEButton qtebutton = qte.GetComponent<QTEButton>();
+        qtebutton.correctEvent += qteCorrect;
+        qtebutton.falseEvent += qteFail;
+        qtebutton.StartQte();
+    }
+
+    private void qteFail()
+    {
+        qteCount++;
+        StartCoroutine(playerMoveSwitch());
+        Debug.Log("QTE " + qteCount + " Failed!");
+    }
+
+    IEnumerator playerMoveSwitch()
+    {
+        //防止qte结束后方向键未松开导致意外的移动
+        yield return new WaitForSeconds(0.1f);
+        player.GetComponent<PlayerMovement>().moveSwitch = true;
     }
 }

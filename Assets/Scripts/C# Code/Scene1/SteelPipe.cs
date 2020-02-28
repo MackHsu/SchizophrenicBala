@@ -9,5 +9,6 @@ public class SteelPipe : MonoBehaviour
         GameObject canvas = GameObject.Find("Canvas");
         HintManager.ShowTips(canvas, 4);
         HintManager.ShowTips(canvas, 3);
+        GameObject.Find("QTERoot").transform.Find("QTETrigger").gameObject.SetActive(true);
     }
 }

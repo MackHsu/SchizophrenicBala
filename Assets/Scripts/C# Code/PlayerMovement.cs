@@ -12,7 +12,8 @@ public class PlayerMovement : MonoBehaviour
     Transform playerTransform;
     Transform groundTransfrom;
     bool jump = false;
-    public bool canMove = true;
+    bool canMove = true;
+    public bool moveSwitch = true;
 
     // Start is called before the first frame update
     void Start()
@@ -24,7 +25,7 @@ public class PlayerMovement : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        if (SceneManager.GetActiveScene().name == "WelcomeScene" || GameManager.focusStack.Count != 0) canMove = false;
+        if (!moveSwitch || GameManager.focusStack.Count != 0) canMove = false;
         else canMove = true;
 
         horizontalMove = Input.GetAxisRaw("Horizontal") * moveSpeed;

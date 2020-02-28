@@ -6,10 +6,21 @@ public class Pickable : MonoBehaviour
 {
     public int itemId;
     public int number;
+    bool playerEnter = false;
 
-    private void OnTriggerStay2D(Collider2D collision)
+    private void OnTriggerEnter2D(Collider2D collision)
     {
-        if (Input.GetKeyDown(KeyCode.E) && collision.tag == "Player")
+        if (collision.tag == "Player") playerEnter = true;
+    }
+
+    private void OnTriggerExit2D(Collider2D collision)
+    {
+        if (collision.tag == "player") playerEnter = false;
+    }
+
+    private void Update()
+    {
+        if (Input.GetKeyDown(KeyCode.E) && playerEnter)
         {
             bool found = false;
             foreach (Item item in GameManager.save.inventory)
