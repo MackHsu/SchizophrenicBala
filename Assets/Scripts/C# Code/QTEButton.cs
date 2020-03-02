@@ -29,7 +29,7 @@ public class QTEButton : MonoBehaviour
         deltaScale = new Vector3(speed, speed, 0f);
 
         GameManager.focusStack.Add(gameObject);
-        index = Random.Range(0, keys.Count - 1);
+        index = Random.Range(0, keys.Count);
         transform.Find("Text").GetComponent<Text>().text = keys[index].keyName;
 
         outer = transform.Find("Outer").transform;

@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using LitJson;
 using System.IO;
+using UnityEngine.SceneManagement;
 
 public class Scene1Manager : MonoBehaviour
 {
@@ -72,41 +73,50 @@ public class Scene1Manager : MonoBehaviour
                 GameObject qtePrefab = Resources.Load("Prefabs/QTEButton") as GameObject;
                 GameObject qte = Instantiate(qtePrefab, canvas.transform.position, Quaternion.identity, canvas.transform);
                 QTEButton qtebutton = qte.GetComponent<QTEButton>();
-                qtebutton.correctEvent += qteCorrect;
-                qtebutton.falseEvent += qteFail;
+                qtebutton.correctEvent += ()=> { QteCorrect(1); };
+                qtebutton.falseEvent += () => { QteFail(1); };
                 qtebutton.StartQte();
+                Time.timeScale = 0;
             }
         }
     }
 
-    private void qteCorrect()
+    private void QteCorrect(int i)
     {
-        qteCount++;
-        Debug.Log("QTE " + qteCount + " Succeeded!");
-        if (qteCount == 3)
+        Debug.Log("QTE " + i + " Succeeded!");
+        if (i == 3)
         {
-            StartCoroutine(playerMoveSwitch());
+            StartCoroutine(ToScene2());
             return;
         }
+        Destroy(GameObject.Find("Police" + i));
         GameObject qtePrefab = Resources.Load("Prefabs/QTEButton") as GameObject;
         GameObject qte = Instantiate(qtePrefab, canvas.transform.position, Quaternion.identity, canvas.transform);
         QTEButton qtebutton = qte.GetComponent<QTEButton>();
-        qtebutton.correctEvent += qteCorrect;
-        qtebutton.falseEvent += qteFail;
+        qtebutton.correctEvent += () => { QteCorrect(i + 1); };
+        qtebutton.falseEvent += () => { QteFail(i + 1); };
         qtebutton.StartQte();
     }
 
-    private void qteFail()
+    private void QteFail(int i)
     {
-        qteCount++;
-        StartCoroutine(playerMoveSwitch());
-        Debug.Log("QTE " + qteCount + " Failed!");
+        //StartCoroutine(PlayerMoveSwitch());
+        StartCoroutine(ToScene2());
+        Debug.Log("QTE " + i + " Failed!");
     }
 
-    IEnumerator playerMoveSwitch()
+    IEnumerator PlayerMoveSwitch()
     {
         //防止qte结束后方向键未松开导致意外的移动
         yield return new WaitForSeconds(0.1f);
         player.GetComponent<PlayerMovement>().moveSwitch = true;
+    }
+
+    IEnumerator ToScene2()
+    {
+        Time.timeScale = 1;
+        player.GetComponent<SpriteRenderer>().sprite = Resources.Load("Images/Bala/Bala", typeof(Sprite)) as Sprite;
+        yield return new WaitForSecondsRealtime(1f);
+        //SceneManager.LoadScene("Scene2");
     }
 }
