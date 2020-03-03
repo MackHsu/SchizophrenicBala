@@ -115,8 +115,9 @@ public class Scene1Manager : MonoBehaviour
     IEnumerator ToScene2()
     {
         Time.timeScale = 1;
-        player.GetComponent<SpriteRenderer>().sprite = Resources.Load("Images/Bala/Bala", typeof(Sprite)) as Sprite;
+        //player.GetComponent<SpriteRenderer>().sprite = Resources.Load("Images/Bala/avatar", typeof(Sprite)) as Sprite;
+        GameManager.ChangePersonality(0);
         yield return new WaitForSecondsRealtime(1f);
-        //SceneManager.LoadScene("Scene2");
+        SceneManager.LoadScene("Scene2");
     }
 }

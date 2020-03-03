@@ -4,19 +4,19 @@
     "type": 0,
     "content": [
       {
-        "imagePath": "Geno/Geno",
+        "imagePath": "Geno/avatar",
         "side": 0,
         "characterName": "Geno",
         "content": "该死……这次下手重了点。"
       },
       {
-        "imagePath": "Geno/Geno",
+        "imagePath": "Geno/avatar",
         "side": 0,
         "characterName": "Geno",
         "content": "看来事情闹得太严重了，估计警察很快就要来了。"
       },
       {
-        "imagePath": "Geno/Geno",
+        "imagePath": "Geno/avatar",
         "side": 0,
         "characterName": "Geno",
         "content": "该死，看看有没有东西可以拿来当武器用用，不知道这次还闯不闯得出去。"
@@ -45,7 +45,7 @@
   },
   {
     "id": 5,
-    "type": 1,
+    "type": 0,
     "content": [
       {
         "imagePath": "NPC/Police",
@@ -54,11 +54,93 @@
         "content": "站住别动，举起手来立刻投降！"
       },
       {
-        "imagePath": "Geno/Geno",
+        "imagePath": "Geno/avatar",
         "side": 0,
         "characterName": "Geno",
         "content": "看来，只能开干了。"
       }
     ]
+  },
+  {
+    "id": 6,
+    "type": 0,
+    "content": [
+      {
+        "imagePath": "Bala/avatar",
+        "side": 0,
+        "characterName": "Bǎla",
+        "content": "我这是……在哪里？"
+      },
+      {
+        "imagePath": "Bala/avatar",
+        "side": 0,
+        "characterName": "Bǎla",
+        "content": "我这是……在哪里？"
+      },
+      {
+        "imagePath": "Bala/avatar",
+        "side": 0,
+        "characterName": "Bǎla",
+        "content": "……怎么回事，发生了什么事情？"
+      }
+    ]
+  },
+  {
+    "id": 7,
+    "type": 0,
+    "content": [
+      {
+        "imagePath": "Bala/avatar",
+        "side": 0,
+        "characterName": "Bǎla",
+        "content": "我记得……对了！是Geno，他又跑出来了！一定是他又惹事了。"
+      },
+      {
+        "imagePath": "Bala/avatar",
+        "side": 0,
+        "characterName": "Bǎla",
+        "content": "这是什么地方？我完全动不了……"
+      },
+      {
+        "imagePath": "Bala/avatar",
+        "side": 0,
+        "characterName": "Bǎla",
+        "content": "还是让Pot来试试吧。"
+      }
+    ]
+  },
+  {
+    "id": 8,
+    "type": 1,
+    "content": "按下Space键，可以在不同人格之间切换。"
+  },
+  {
+    "id": 9,
+    "type": 0,
+    "content": [
+      {
+        "imagePath": "Pot/avatar",
+        "side": 0,
+        "characterName": "Pot",
+        "content": "嗯……叫我起来干嘛？"
+      },
+      {
+        "imagePath": "Pot/avatar",
+        "side": 0,
+        "characterName": "Pot",
+        "content": "咦？我怎么被绑着？是想让我解开吗？"
+      },
+      {
+        "imagePath": "Pot/avatar",
+        "side": 0,
+        "characterName": "Pot",
+        "content": "嘿嘿，小意思嘛。看我的！"
+      }
+    ]
+  },
+  {
+    "id": 10,
+    "type": 1,
+    "content": "长按E解开束缚衣。当出现半圆形圆盘时，需要在指针指向白色区域时按下Space，否则将引起警卫的警觉。"
   }
 ]

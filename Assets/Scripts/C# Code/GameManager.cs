@@ -11,7 +11,7 @@ public class GameManager : MonoBehaviour
     public static JsonData textJson;
     public static JsonData itemsJson;
     public static Save save;
-    static GameObject player;
+    public static JsonData currentPersonality;
     public static List<GameObject> focusStack;  //用一个栈来记录打开的UI（如菜单、物品栏、对话框），栈顶为当前操作的UI，栈空则为对Player进行操作
 
     public static Dictionary<string, bool> flags;
@@ -22,7 +22,6 @@ public class GameManager : MonoBehaviour
         personalities = JsonMapper.ToObject(Resources.Load<TextAsset>("json/personalitiesTest").text);
         textJson = JsonMapper.ToObject(Resources.Load<TextAsset>("json/text").text);
         itemsJson = JsonMapper.ToObject(Resources.Load<TextAsset>("json/items").text);
-        player = GameObject.Find("Player");
         focusStack = new List<GameObject>();
 
         DontDestroyOnLoad(gameObject);
@@ -53,5 +52,24 @@ public class GameManager : MonoBehaviour
             //在展示弹出窗口时按下escape，关闭弹窗(出栈并destroy)
             Destroy(focusStack[focusStack.Count - 1]);
         }
+    }
+
+    public static JsonData GetPersonalityJson()
+    {
+        foreach(JsonData json in personalities)
+        {
+            if ((int)json["pid"] == save.personalityId)
+            {
+                return json;
+            }
+        }
+        return null;
+    }
+
+    public static void ChangePersonality(int pid)
+    {
+        save.personalityId = pid;
+        GameObject player = GameObject.FindGameObjectWithTag("Player");
+        player.GetComponent<SpriteRenderer>().sprite = Resources.Load("Images/" + (string)GetPersonalityJson()["imageFolder"] + "/avatar", typeof(Sprite)) as Sprite;
     }
 }
