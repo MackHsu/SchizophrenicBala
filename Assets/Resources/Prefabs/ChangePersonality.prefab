@@ -1058,7 +1058,7 @@ GameObject:
   - component: {fileID: 5747652498174722125}
   - component: {fileID: 5747652498174722124}
   m_Layer: 5
-  m_Name: Button
+  m_Name: Confirm
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -2405,6 +2405,8 @@ MonoBehaviour:
   - {fileID: 5747652497608638099}
   - {fileID: 5747652498280429686}
   description: {fileID: 5747652499669295170}
+  confirm: {fileID: 5747652498174722124}
+  cancel: {fileID: 5747652497537291056}
 --- !u!1 &5747652499487167905
 GameObject:
   m_ObjectHideFlags: 0

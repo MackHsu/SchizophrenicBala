@@ -47,6 +47,13 @@ public class GameManager : MonoBehaviour
             GameObject inventory = Instantiate(inventoryPrefab, canvas.transform.position, Quaternion.identity, canvas.transform);
             focusStack.Add(inventory);
         }
+        else if (focusStack.Count == 0 && Input.GetKeyDown(KeyCode.Q) && save.scene != 1)
+        {
+            GameObject canvas = GameObject.Find("Canvas");
+            canvas.transform.Find("Mask").GetComponent<Image>().gameObject.SetActive(true);
+            GameObject personalityPrefab = Resources.Load("Prefabs/ChangePersonality") as GameObject;
+            GameObject personality = Instantiate(personalityPrefab, canvas.transform.position, Quaternion.identity, canvas.transform);
+        }
         else if (focusStack.Count != 0 && Input.GetKeyDown(KeyCode.Escape))
         {
             //在展示弹出窗口时按下escape，关闭弹窗(出栈并destroy)
