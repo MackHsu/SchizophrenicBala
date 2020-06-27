@@ -41,6 +41,7 @@ public class GameManager : MonoBehaviour
         }
         else if (focusStack.Count == 0 && Input.GetKeyDown(KeyCode.B))
         {
+            // 打开背包
             GameObject canvas = GameObject.Find("Canvas");
             canvas.transform.Find("Mask").GetComponent<Image>().gameObject.SetActive(true);
             GameObject inventoryPrefab = Resources.Load("Prefabs/Inventory") as GameObject;
@@ -49,6 +50,7 @@ public class GameManager : MonoBehaviour
         }
         else if (focusStack.Count == 0 && Input.GetKeyDown(KeyCode.Q) && save.scene != 1)
         {
+            // 转换人格
             GameObject canvas = GameObject.Find("Canvas");
             canvas.transform.Find("Mask").GetComponent<Image>().gameObject.SetActive(true);
             GameObject personalityPrefab = Resources.Load("Prefabs/ChangePersonality") as GameObject;
@@ -63,7 +65,7 @@ public class GameManager : MonoBehaviour
 
     public static JsonData GetPersonalityJson()
     {
-        foreach(JsonData json in personalities)
+        foreach (JsonData json in personalities)
         {
             if ((int)json["pid"] == save.personalityId)
             {

@@ -58,26 +58,26 @@ public class Scene1Manager : MonoBehaviour
             {
                 //显示对话0
                 popUp = HintManager.ShowDialogue(canvas, 0);
-                GameManager.save.flags["S1F1"] = true;
+                popUp.GetComponent<Conversation>().DestroyEvent += ShowTips;
             }
-            else if (GameManager.save.flags["S1F2"] == false && popUp == null)
-            {
-                //对话0结束后显示提示1
-                popUp = HintManager.ShowTips(canvas, 1);
-                GameManager.save.flags["S1F2"] = true;
-            }
-            else if (GameManager.save.flags["S1F3"] == true && !qteTriggered)
-            {
-                player.GetComponent<PlayerMovement>().moveSwitch = false;
-                qteTriggered = true;
-                GameObject qtePrefab = Resources.Load("Prefabs/QTEButton") as GameObject;
-                GameObject qte = Instantiate(qtePrefab, canvas.transform.position, Quaternion.identity, canvas.transform);
-                QTEButton qtebutton = qte.GetComponent<QTEButton>();
-                qtebutton.correctEvent += ()=> { QteCorrect(1); };
-                qtebutton.falseEvent += () => { QteFail(1); };
-                qtebutton.StartQte();
-                Time.timeScale = 0;
-            }
+            //else if (GameManager.save.flags["S1F2"] == false && popUp == null)
+            //{
+            //    //对话0结束后显示提示1
+            //    popUp = HintManager.ShowTips(canvas, 1);
+            //    GameManager.save.flags["S1F2"] = true;
+            //}
+            // else if (GameManager.save.flags["S1F3"] == true && !qteTriggered)
+            // {
+            //     player.GetComponent<PlayerMovement>().moveSwitch = false;
+            //     qteTriggered = true;
+            //     GameObject qtePrefab = Resources.Load("Prefabs/QTEButton") as GameObject;
+            //     GameObject qte = Instantiate(qtePrefab, canvas.transform.position, Quaternion.identity, canvas.transform);
+            //     QTEButton qtebutton = qte.GetComponent<QTEButton>();
+            //     qtebutton.correctEvent += () => { QteCorrect(1); };
+            //     qtebutton.falseEvent += () => { QteFail(1); };
+            //     qtebutton.StartQte();
+            //     Time.timeScale = 0;
+            // }
         }
     }
 
@@ -119,5 +119,26 @@ public class Scene1Manager : MonoBehaviour
         GameManager.ChangePersonality(0);
         yield return new WaitForSecondsRealtime(1f);
         SceneManager.LoadScene("Scene2");
+    }
+
+    public void ShowTips()
+    {
+        //对话0结束后显示提示1
+        popUp = HintManager.ShowTips(canvas, 1);
+        popUp.GetComponent<Tips>().DestroyEvent += () => { GameManager.save.flags["S1F1"] = true; };
+    }
+
+    public void StartQTE()
+    {
+        Debug.Log("StartQTE called");
+        player.GetComponent<PlayerMovement>().moveSwitch = false;
+        qteTriggered = true;
+        GameObject qtePrefab = Resources.Load("Prefabs/QTEButton") as GameObject;
+        GameObject qte = Instantiate(qtePrefab, canvas.transform.position, Quaternion.identity, canvas.transform);
+        QTEButton qtebutton = qte.GetComponent<QTEButton>();
+        qtebutton.correctEvent += () => { QteCorrect(1); };
+        qtebutton.falseEvent += () => { QteFail(1); };
+        qtebutton.StartQte();
+        Time.timeScale = 0;
     }
 }
