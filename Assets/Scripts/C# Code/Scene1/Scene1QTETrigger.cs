@@ -13,6 +13,9 @@ public class Scene1QTETrigger : MonoBehaviour
     private void OnTriggerEnter2D(Collider2D collision)
     {
         // move the police officers
+        police1.SetActive(true);
+        police2.SetActive(true);
+        police3.SetActive(true);
         StartCoroutine(PoliceMove(police1, player.transform.position.x + 1.5f));
         StartCoroutine(PoliceMove(police2, player.transform.position.x + 2.5f));
         StartCoroutine(PoliceMove(police3, player.transform.position.x + 3.5f));
