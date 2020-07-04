@@ -32,7 +32,7 @@ public class GameManager : MonoBehaviour
     {
         if (focusStack.Count == 0 && Input.GetKeyDown(KeyCode.Escape))
         {
-            //打开菜单
+            // 打开菜单
             GameObject canvas = GameObject.Find("Canvas");
             canvas.transform.Find("Mask").GetComponent<Image>().gameObject.SetActive(true);
             GameObject menuPrefab = Resources.Load("Prefabs/menu") as GameObject;

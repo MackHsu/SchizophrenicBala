@@ -16,8 +16,5 @@ public class Save
         scene = 1;
         flags = new Dictionary<string, bool>();
         inventory = new List<Item>();
-
-        //flags.Add("S1F1", false);
-        //inventory.Add(new Item(0, 1));
     }
 }

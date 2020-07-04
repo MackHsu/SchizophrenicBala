@@ -13,7 +13,7 @@ public class Scene1Manager : MonoBehaviour
     GameObject popUp;
     List<bool> flags;
     bool qteTriggered = false;
-    bool itemExits = false;
+    bool itemExits = false; // 场景或库存中是否有钢管
     int qteCount = 0;
 
     // Start is called before the first frame update
@@ -28,16 +28,16 @@ public class Scene1Manager : MonoBehaviour
     {
         if (!itemExits)
         {
-            //如果库存中没有0号物品（钢管），则创建一个可拾取的钢管
             foreach (Item item in GameManager.save.inventory)
             {
                 if (item.id == 0)
                 {
-                    GameObject.Find("QTERoot").transform.Find("QTETrigger").gameObject.SetActive(true);
+                    //GameObject.Find("QTERoot").transform.Find("QTETrigger").gameObject.SetActive(true);
                     itemExits = true;
                     break;
                 }
             }
+            //如果库存中没有0号物品（钢管），则创建一个可拾取的钢管
             if (!itemExits)
             {
                 GameObject steelPipe = new GameObject("SteelPipe");
@@ -60,24 +60,6 @@ public class Scene1Manager : MonoBehaviour
                 popUp = HintManager.ShowDialogue(canvas, 0);
                 popUp.GetComponent<Conversation>().DestroyEvent += ShowTips;
             }
-            //else if (GameManager.save.flags["S1F2"] == false && popUp == null)
-            //{
-            //    //对话0结束后显示提示1
-            //    popUp = HintManager.ShowTips(canvas, 1);
-            //    GameManager.save.flags["S1F2"] = true;
-            //}
-            // else if (GameManager.save.flags["S1F3"] == true && !qteTriggered)
-            // {
-            //     player.GetComponent<PlayerMovement>().moveSwitch = false;
-            //     qteTriggered = true;
-            //     GameObject qtePrefab = Resources.Load("Prefabs/QTEButton") as GameObject;
-            //     GameObject qte = Instantiate(qtePrefab, canvas.transform.position, Quaternion.identity, canvas.transform);
-            //     QTEButton qtebutton = qte.GetComponent<QTEButton>();
-            //     qtebutton.correctEvent += () => { QteCorrect(1); };
-            //     qtebutton.falseEvent += () => { QteFail(1); };
-            //     qtebutton.StartQte();
-            //     Time.timeScale = 0;
-            // }
         }
     }
 
@@ -86,6 +68,7 @@ public class Scene1Manager : MonoBehaviour
         Debug.Log("QTE " + i + " Succeeded!");
         if (i == 3)
         {
+            GameManager.save.flags["S1F2"] = true;
             StartCoroutine(ToScene2());
             return;
         }

@@ -27,7 +27,6 @@ public class ButtonEvents : MonoBehaviour
     {
         GameManager.save = JsonMapper.ToObject<Save>(Resources.Load<TextAsset>("json/beginnerSave").text);  //初始存档
         SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex + 1);
-        //SceneManager.LoadScene("Scene2");       //测试用
     }
 
     private void Load()
