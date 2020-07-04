@@ -4,12 +4,14 @@ using UnityEngine;
 using UnityEngine.UI;
 using LitJson;
 using System.IO;
+using UnityEngine.SceneManagement;
 
 public class Menu : MonoBehaviour
 {
     public Button saveBtn;
     public Button exitBtn;
     public Button cancelBtn;
+    public Button backToWelcomeBtn;
     GameObject player;
     GameObject saveSlots;
 
@@ -22,6 +24,7 @@ public class Menu : MonoBehaviour
         saveBtn.onClick.AddListener(Save);
         cancelBtn.onClick.AddListener(Cancel);
         exitBtn.onClick.AddListener(Exit);
+        backToWelcomeBtn.onClick.AddListener(BackToWelcomeScene);
     }
 
     // Update is called once per frame
@@ -47,13 +50,6 @@ public class Menu : MonoBehaviour
         GameObject canvas = GameObject.Find("Canvas");
         saveSlots = Instantiate(saveSlotsPrefab, canvas.transform.position, Quaternion.identity, canvas.transform);
         GameManager.focusStack.Add(saveSlots);
-        //if (!File.Exists("save.json")) File.Create("save.json").Close();
-        //using (StreamWriter sw = new StreamWriter(new FileStream("save.json", FileMode.Truncate)))
-        //{
-        //    Save save = new Save();
-        //    sw.Write(JsonMapper.ToJson(save));
-        //    sw.Close();
-        //}
     }
 
     void Cancel()
@@ -64,6 +60,11 @@ public class Menu : MonoBehaviour
     void Exit()
     {
         Application.Quit();
+    }
+
+    void BackToWelcomeScene()
+    {
+        SceneManager.LoadScene("WelcomeScene");
     }
 
 }

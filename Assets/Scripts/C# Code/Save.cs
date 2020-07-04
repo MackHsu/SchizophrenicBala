@@ -10,11 +10,11 @@ public class Save
     public Dictionary<string, bool> flags;     //剧情进度标志
     public List<Item> inventory;    //物品
 
-    public Save()
-    {
-        personalityId = 1;
-        scene = 1;
-        flags = new Dictionary<string, bool>();
-        inventory = new List<Item>();
-    }
+    //public Save()
+    //{
+    //    personalityId = 1;
+    //    scene = 1;
+    //    flags = new Dictionary<string, bool>();
+    //    inventory = new List<Item>();
+    //}
 }
